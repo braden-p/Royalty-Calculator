@@ -1,12 +1,9 @@
 
-ROYALTY CALCULATOR TODO:
+ROYALTY CALCULATOR
 
+TODO:
 - Modify Licenses File:
-    - Add UPCs
-    - Update product-type fields, so they are only CD, LP, or All Digital
-
-- Modify Physical Sales File:
-    - Make sure catalog numbers exactly match catalog numbers in licenses file
+    - Make sure Throwback LP is in licenses file
 
 
 PHYSICAL SALES FILE PROCESSING WORKFLOW:
