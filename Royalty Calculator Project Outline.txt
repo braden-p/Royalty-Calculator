@@ -2,6 +2,8 @@
 ROYALTY CALCULATOR
 
 TODO:
+- Modify Royalty_Calculator.py to handle lock date royalty rates
+
 - Modify Licenses File:
     - Make sure Throwback LP is in licenses file
 
