@@ -42,13 +42,13 @@ def calculate_1998_1999_net_rate(row):
         return row['penny-rate']
     elif row['rate-type'] == 'Full Stat':
         if row['track-minutes'] < 5:
-            return 0.071
+            return 0.071 * (row['rate-percent'] / 100)
         elif row['track-minutes'] == 5 and row['track-seconds'] == 0:
-            return 0.071
+            return 0.071 * (row['rate-percent'] / 100)
         else:
-            return (row['track-minutes'] + 1) * 0.0135
+            return (row['track-minutes'] + 1) * 0.0135 * (row['rate-percent'] / 100)
     elif row['rate-type'] == 'Min Stat':
-        return 0.071
+        return 0.071 * (row['rate-percent'] / 100)
     else:
         return None  # Handle unknown rate-types if needed
 
@@ -57,13 +57,13 @@ def calculate_2000_2001_net_rate(row):
         return row['penny-rate']
     elif row['rate-type'] == 'Full Stat':
         if row['track-minutes'] < 5:
-            return 0.0755
+            return 0.0755 * (row['rate-percent'] / 100)
         elif row['track-minutes'] == 5 and row['track-seconds'] == 0:
-            return 0.0755
+            return 0.0755 * (row['rate-percent'] / 100)
         else:
-            return (row['track-minutes'] + 1) * 0.0145
+            return (row['track-minutes'] + 1) * 0.0145 * (row['rate-percent'] / 100)
     elif row['rate-type'] == 'Min Stat':
-        return 0.0755
+        return 0.0755 * (row['rate-percent'] / 100)
     else:
         return None  # Handle unknown rate-types if needed
 
@@ -72,13 +72,13 @@ def calculate_2002_2003_net_rate(row):
         return row['penny-rate']
     elif row['rate-type'] == 'Full Stat':
         if row['track-minutes'] < 5:
-            return 0.08
+            return 0.08 * (row['rate-percent'] / 100)
         elif row['track-minutes'] == 5 and row['track-seconds'] == 0:
-            return 0.08
+            return 0.08 * (row['rate-percent'] / 100)
         else:
-            return (row['track-minutes'] + 1) * 0.0155
+            return (row['track-minutes'] + 1) * 0.0155 * (row['rate-percent'] / 100)
     elif row['rate-type'] == 'Min Stat':
-        return 0.08
+        return 0.08 * (row['rate-percent'] / 100)
     else:
         return None  # Handle unknown rate-types if needed
 
@@ -87,13 +87,13 @@ def calculate_2004_2005_net_rate(row):
         return row['penny-rate']
     elif row['rate-type'] == 'Full Stat':
         if row['track-minutes'] < 5:
-            return 0.085
+            return 0.085 * (row['rate-percent'] / 100)
         elif row['track-minutes'] == 5 and row['track-seconds'] == 0:
-            return 0.085
+            return 0.085 * (row['rate-percent'] / 100)
         else:
-            return (row['track-minutes'] + 1) * 0.0165
+            return (row['track-minutes'] + 1) * 0.0165 * (row['rate-percent'] / 100)
     elif row['rate-type'] == 'Min Stat':
-        return 0.085
+        return 0.085 * (row['rate-percent'] / 100)
     else:
         return None  # Handle unknown rate-types if needed
 
@@ -102,13 +102,13 @@ def calculate_2006_2022_net_rate(row):
         return row['penny-rate']
     elif row['rate-type'] == 'Full Stat':
         if row['track-minutes'] < 5:
-            return 0.091
+            return 0.091 * (row['rate-percent'] / 100)
         elif row['track-minutes'] == 5 and row['track-seconds'] == 0:
-            return 0.091
+            return 0.091 * (row['rate-percent'] / 100)
         else:
-            return (row['track-minutes'] + 1) * 0.0175
+            return ((row['track-minutes'] + 1) * 0.0175) * (row['rate-percent'] / 100)
     elif row['rate-type'] == 'Min Stat':
-        return 0.091
+        return 0.091 * (row['rate-percent'] / 100)
     else:
         return None  # Handle unknown rate-types if needed
 
