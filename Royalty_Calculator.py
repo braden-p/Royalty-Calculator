@@ -2,7 +2,7 @@
 Royalty Calculator
 Created by Braden Piper, bradenpiper.com
 Created on Aug 21, 2023
-Version = 0.1
+Version = 1.0
 ------------------------------------------
 DESCRIPTION:
 A mechanical royalty calculation and management software.
