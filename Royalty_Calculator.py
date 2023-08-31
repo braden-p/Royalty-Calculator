@@ -16,13 +16,88 @@ sales_df = pd.read_excel('Physical_Sales.xlsx')
 
 # Filter Relevant Columns
 sales_filtered = sales_df[['product-type', 'upc', 'net-units']]
-licenses_filtered = licenses_df[['upc', 'product-type', 'publisher', 'admin', 'agent', 'album-title', 'catalog-no', 'track-title', 'isrc', 'share', 'rate-type', 'rate-percent', 'track-minutes', 'track-seconds', 'penny-rate']]
+licenses_filtered = licenses_df[['upc', 'product-type', 'publisher', 'admin', 'agent', 'album-title', 'catalog-no', 'track-title', 'isrc', 'share', 'rate-type', 'rate-percent', 'track-minutes', 'track-seconds', 'lock-date', 'penny-rate']]
 
 # Merge Data and Perform Calculations
 merged_df = pd.merge(sales_filtered, licenses_filtered, how='inner', on=['upc', 'product-type'])
 
-# Calculate net rate based on rate-type
+# Calculate net rate based on lock-date and rate-type
 def calculate_net_rate(row):
+    lock_date = row['lock-date']
+    if pd.isnull(lock_date):  # If lock-date is empty, use the 2006-2022 rates
+        return calculate_2006_2022_net_rate(row)
+    elif lock_date >= pd.Timestamp(1998, 1, 1) and lock_date <= pd.Timestamp(1999, 12, 31):
+        return calculate_1998_1999_net_rate(row)
+    elif lock_date >= pd.Timestamp(2000, 1, 1) and lock_date <= pd.Timestamp(2001, 12, 31):
+        return calculate_2000_2001_net_rate(row)
+    elif lock_date >= pd.Timestamp(2002, 1, 1) and lock_date <= pd.Timestamp(2003, 12, 31):
+        return calculate_2002_2003_net_rate(row)
+    elif lock_date >= pd.Timestamp(2004, 1, 1) and lock_date <= pd.Timestamp(2005, 12, 31):
+        return calculate_2004_2005_net_rate(row)
+    else:
+        return calculate_2006_2022_net_rate(row)
+
+def calculate_1998_1999_net_rate(row):
+    if row['rate-type'] == 'Penny Rate':
+        return row['penny-rate']
+    elif row['rate-type'] == 'Full Stat':
+        if row['track-minutes'] < 5:
+            return 0.071
+        elif row['track-minutes'] == 5 and row['track-seconds'] == 0:
+            return 0.071
+        else:
+            return (row['track-minutes'] + 1) * 0.0135
+    elif row['rate-type'] == 'Min Stat':
+        return 0.071
+    else:
+        return None  # Handle unknown rate-types if needed
+
+def calculate_2000_2001_net_rate(row):
+    if row['rate-type'] == 'Penny Rate':
+        return row['penny-rate']
+    elif row['rate-type'] == 'Full Stat':
+        if row['track-minutes'] < 5:
+            return 0.0755
+        elif row['track-minutes'] == 5 and row['track-seconds'] == 0:
+            return 0.0755
+        else:
+            return (row['track-minutes'] + 1) * 0.0145
+    elif row['rate-type'] == 'Min Stat':
+        return 0.0755
+    else:
+        return None  # Handle unknown rate-types if needed
+
+def calculate_2002_2003_net_rate(row):
+    if row['rate-type'] == 'Penny Rate':
+        return row['penny-rate']
+    elif row['rate-type'] == 'Full Stat':
+        if row['track-minutes'] < 5:
+            return 0.08
+        elif row['track-minutes'] == 5 and row['track-seconds'] == 0:
+            return 0.08
+        else:
+            return (row['track-minutes'] + 1) * 0.0155
+    elif row['rate-type'] == 'Min Stat':
+        return 0.08
+    else:
+        return None  # Handle unknown rate-types if needed
+
+def calculate_2004_2005_net_rate(row):
+    if row['rate-type'] == 'Penny Rate':
+        return row['penny-rate']
+    elif row['rate-type'] == 'Full Stat':
+        if row['track-minutes'] < 5:
+            return 0.085
+        elif row['track-minutes'] == 5 and row['track-seconds'] == 0:
+            return 0.085
+        else:
+            return (row['track-minutes'] + 1) * 0.0165
+    elif row['rate-type'] == 'Min Stat':
+        return 0.085
+    else:
+        return None  # Handle unknown rate-types if needed
+
+def calculate_2006_2022_net_rate(row):
     if row['rate-type'] == 'Penny Rate':
         return row['penny-rate']
     elif row['rate-type'] == 'Full Stat':
