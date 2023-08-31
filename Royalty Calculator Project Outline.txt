@@ -2,7 +2,11 @@
 ROYALTY CALCULATOR
 
 TODO:
-- Modify Royalty_Calculator.py to handle lock date royalty rates
+- Add rate-percent to royalty rate calculation (note that rate-percent and share are two separate numbers)
+- Make net-rate display post-calculation rate on royalty-run excel sheet
+    - possibly include two columns: "rate" and "net-rate" where rate is 100% rate and net-rate is the post-share calculation
+- Include Rate Period on royalty-run excel sheet
+DONE - Modify Royalty_Calculator.py to handle lock date royalty rates
 
 - Modify Licenses File:
     - Make sure Throwback LP is in licenses file
