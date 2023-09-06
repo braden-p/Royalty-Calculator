@@ -114,6 +114,24 @@ def calculate_2006_2022_rate(row):
 
 merged_df['rate'] = merged_df.apply(calculate_rate, axis=1)
 
+# Calculate rate-period based on lock-date
+def calculate_rate_period(lock_date):
+    if lock_date >= pd.Timestamp(1998, 1, 1) and lock_date <= pd.Timestamp(1999, 12, 31):
+        return '1998-1999'
+    elif lock_date >= pd.Timestamp(2000, 1, 1) and lock_date <= pd.Timestamp(2001, 12, 31):
+        return '2000-2001'
+    elif lock_date >= pd.Timestamp(2002, 1, 1) and lock_date <= pd.Timestamp(2003, 12, 31):
+        return '2002-2003'
+    elif lock_date >= pd.Timestamp(2004, 1, 1) and lock_date <= pd.Timestamp(2005, 12, 31):
+        return '2004-2005'
+    elif lock_date >= pd.Timestamp(2006, 1, 1) and lock_date <= pd.Timestamp(2022, 12, 31):
+        return '2006-2022'
+    else:
+        return None  # No rate-period for empty lock-date or outside specified periods
+
+# Add 'rate-period' column to merged_df
+merged_df['rate-period'] = merged_df['lock-date'].apply(calculate_rate_period)
+
 # Calculate net rate
 def calculate_net_rate(row):
     if row['rate-type'] == 'Penny Rate':
@@ -130,5 +148,5 @@ def calculate_balance(row):
 merged_df['balance'] = merged_df.apply(calculate_balance, axis=1)
 
 # Create New Excel Spreadsheet
-royalty_run_df = merged_df[['publisher', 'admin', 'agent', 'album-title', 'catalog-no', 'upc', 'track-number', 'track-title', 'isrc', 'product-type', 'share', 'net-rate', 'net-units', 'balance']]
+royalty_run_df = merged_df[['publisher', 'admin', 'agent', 'album-title', 'catalog-no', 'upc', 'track-number', 'track-title', 'isrc', 'product-type', 'rate-period', 'share', 'net-rate', 'net-units', 'balance']]
 royalty_run_df.to_excel('royalty-run.xlsx', index=False)
