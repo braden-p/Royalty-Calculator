@@ -10,3 +10,6 @@ A mechanical royalty calculation and management software.
 
 with open("Physical_Sales_Royalty_Calculator.py") as process_physical:
     exec(process_physical.read())
+
+with open("Digital_Album_Sales_Royalty_Calculator.py") as process_digital_albums:
+    exec(process_digital_albums.read())
