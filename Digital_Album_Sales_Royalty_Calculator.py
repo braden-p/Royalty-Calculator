@@ -41,6 +41,9 @@ def calculate_balance(row):
 
 merged_df['balance'] = merged_df.apply(calculate_balance, axis=1)
 
+# Convert "product-type" column to "DA"
+merged_df['product-type'] = 'DA'
+
 # Create New Excel Spreadsheet
-royalty_run_df = merged_df[['publisher', 'admin', 'agent', 'album-title', 'catalog-no', 'upc', 'track-number', 'track-title', 'isrc', 'original-product-type', 'product-type', 'rate-period', 'share', 'net-rate', 'net-units', 'balance']]
+royalty_run_df = merged_df[['publisher', 'admin', 'agent', 'album-title', 'catalog-no', 'upc', 'track-number', 'track-title', 'isrc', 'product-type', 'rate-period', 'share', 'net-rate', 'net-units', 'balance']]
 royalty_run_df.to_excel('royalty-run-digital-albums.xlsx', index=False)
