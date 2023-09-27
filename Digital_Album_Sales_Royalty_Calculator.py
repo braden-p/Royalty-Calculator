@@ -8,23 +8,14 @@ from Licenses_Functions import calculate_rate_period, calculate_net_rate
 licenses_df = pd.read_excel('Licenses.xlsx')
 sales_df = pd.read_excel('Digital_Album_Sales.xlsx')
 
-# Define a mapping dictionary for product types
-product_type_mapping = {
-    'DA': 'All Digital',
-}
+# Filter Relevant Columns in Sales Data
+sales_filtered = sales_df[['upc', 'net-units']]
 
-# Create a new column 'merged_product_type' in Digital Sales DataFrames using the mapping
-sales_df['merged-product-type'] = sales_df['product-type'].map(product_type_mapping)
-
-# Add a new column 'original_product_type' to Digital Sales DataFrames to store the original product type
-sales_df['original-product-type'] = sales_df['product-type']
-
-# Filter Relevant Columns
-sales_filtered = sales_df[['merged-product-type', 'original-product-type','upc', 'net-units']]
-licenses_filtered = licenses_df[['upc', 'product-type', 'publisher', 'admin', 'agent', 'album-title', 'catalog-no', 'track-number', 'track-title', 'isrc', 'share', 'rate-type', 'rate-percent', 'track-minutes', 'track-seconds', 'lock-date', 'penny-rate']]
+# Filter Rows in Licenses Data where product-type is "All Digital"
+licenses_filtered = licenses_df[licenses_df['product-type'] == 'All Digital'][['upc', 'product-type', 'publisher', 'admin', 'agent', 'album-title', 'catalog-no', 'track-number', 'track-title', 'isrc', 'share', 'rate-type', 'rate-percent', 'track-minutes', 'track-seconds', 'lock-date', 'penny-rate']]
 
 # Merge Data and Perform Calculations
-merged_df = pd.merge(sales_filtered, licenses_filtered, how='inner', left_on=['upc', 'merged-product-type'], right_on=['upc', 'product-type'])
+merged_df = pd.merge(sales_filtered, licenses_filtered, how='inner', on=['upc'])
 
 # Calculate rate based on lock-date and rate-type
 merged_df['rate'] = merged_df.apply(calculate_rate, axis=1)
@@ -44,6 +35,11 @@ merged_df['balance'] = merged_df.apply(calculate_balance, axis=1)
 # Convert "product-type" column to "DA"
 merged_df['product-type'] = 'DA'
 
-# Create New Excel Spreadsheet
+# Create Royalty Run Dataframe
 royalty_run_df = merged_df[['publisher', 'admin', 'agent', 'album-title', 'catalog-no', 'upc', 'track-number', 'track-title', 'isrc', 'product-type', 'rate-period', 'share', 'net-rate', 'net-units', 'balance']]
+
+# Filter rows with net-units greater than 0
+royalty_run_df = royalty_run_df[royalty_run_df['net-units'] > 0]
+
+# Output to Excel
 royalty_run_df.to_excel('royalty-run-digital-albums.xlsx', index=False)
