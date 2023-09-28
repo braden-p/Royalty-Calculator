@@ -1,8 +1,7 @@
 import pandas as pd
 
 # Import Licenses Functions
-from Licenses_Functions import calculate_rate, calculate_1998_1999_rate, calculate_2000_2001_rate, calculate_2002_2003_rate, calculate_2004_2005_rate, calculate_2006_2022_rate
-from Licenses_Functions import calculate_rate_period, calculate_net_rate
+from Licenses_Functions import calculate_rate, calculate_1998_1999_rate, calculate_2000_2001_rate, calculate_2002_2003_rate, calculate_2004_2005_rate, calculate_2006_2022_rate, calculate_rate_period, calculate_net_rate
 
 # Import Excel Files
 licenses_df = pd.read_excel('Licenses.xlsx')
