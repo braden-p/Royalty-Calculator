@@ -34,6 +34,9 @@ merged_df['balance'] = merged_df.apply(calculate_balance, axis=1)
 # Convert "product-type" column to "DT"
 merged_df['product-type'] = 'DT'
 
+# Group by relevant columns and aggregate 'net-units' using sum
+grouped_df = merged_df.groupby(['upc', 'isrc', 'product-type', 'admin', 'agent', 'album-title', 'catalog-no', 'track-number', 'track-title', 'share', 'rate-type', 'rate-percent', 'track-minutes', 'track-seconds', 'lock-date', 'penny-rate', 'rate', 'rate-period']).agg({'net-units': 'sum', 'balance': 'sum'}).reset_index()
+
 # Create New Excel Spreadsheet
 royalty_run_df = merged_df[['publisher', 'admin', 'agent', 'album-title', 'catalog-no', 'upc', 'track-number', 'track-title', 'isrc', 'product-type', 'rate-period', 'share', 'net-rate', 'net-units', 'balance']]
 royalty_run_df.to_excel('royalty-run-digital-tracks.xlsx', index=False)
