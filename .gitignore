@@ -1,4 +1,7 @@
 .DS_Store
 Royalty_Calculator_Project_Outline.txt
 royalty-run.xlsx
+royalty-run-digital-albums.xlsx
+royalty-run-digital-tracks.xlsx
+royalty-run-physical.xlsx
 __pycache__/
