@@ -22,7 +22,7 @@ df.drop(columns=columns_to_drop, inplace=True)
 df.rename(columns={'Orchard UPC': 'upc', 'ISRC': 'isrc', 'Quantity': 'net-units'}, inplace=True)
 
 # Group by all columns and aggregate sum of net-units
-digital_sales_grouped = df.groupby(['upc', 'Project Code', 'Artist Name', 'Product Name', 'Track Name', 'isrc','Track #','Trans Type', 'Trans Type Description']).agg({'net-units': 'sum'}).reset_index()
+digital_sales_grouped = df.groupby(['upc', 'Artist Name', 'Product Name', 'Track Name', 'isrc','Track #','Trans Type', 'Trans Type Description']).agg({'net-units': 'sum'}).reset_index()
 
 # Create separate DataFrames for Digital Album Sales ('DA') and Digital Track Sales ('DT')
 digital_albums_sales = digital_sales_grouped[digital_sales_grouped['Trans Type'] == 'DA']
