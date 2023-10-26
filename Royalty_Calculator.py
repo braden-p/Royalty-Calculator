@@ -28,5 +28,11 @@ df_physical = pd.read_excel('royalty-run-physical.xlsx')
 # Concatenate the DataFrames vertically
 result = pd.concat([df_digital_albums, df_digital_tracks, df_physical])
 
+# Round the 'balance' column to two decimal places
+result['balance'] = result['balance'].round(2)
+
+# Sort the data
+result = result.sort_values(by=['agent', 'admin', 'publisher', 'track-title', 'product-type'])
+
 # Save the merged DataFrame to a new Excel file
 result.to_excel('royalty-run.xlsx', index=False)
