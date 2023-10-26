@@ -5,7 +5,7 @@ from Licenses_Functions import calculate_rate, calculate_1998_1999_rate, calcula
 
 # Import Excel Files
 licenses_df = pd.read_excel('Licenses.xlsx')
-sales_df = pd.read_excel('Digital_Track_Sales.xlsx')
+sales_df = pd.read_excel('Digital_Tracks_Sales_Processed.xlsx')
 
 # Filter Relevant Columns in Sales Data
 sales_filtered = sales_df[['upc', 'isrc', 'net-units']]
