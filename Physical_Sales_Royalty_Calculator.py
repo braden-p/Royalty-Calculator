@@ -11,6 +11,9 @@ sales_df = pd.read_excel('Physical_Sales.xlsx')
 sales_filtered = sales_df[['product-type', 'upc', 'net-units']]
 licenses_filtered = licenses_df[['upc', 'product-type', 'publisher', 'admin', 'agent', 'album-title', 'catalog-no', 'track-number', 'track-title', 'isrc', 'share', 'rate-type', 'rate-percent', 'track-minutes', 'track-seconds', 'lock-date', 'penny-rate']]
 
+# Filter out rows where net-units is 0
+sales_filtered = sales_filtered[sales_filtered['net-units'] != 0]
+
 # Merge Data and Perform Calculations
 merged_df = pd.merge(sales_filtered, licenses_filtered, how='inner', on=['upc', 'product-type'])
 
