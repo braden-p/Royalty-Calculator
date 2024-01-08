@@ -4,4 +4,11 @@ royalty-run.xlsx
 royalty-run-digital-albums.xlsx
 royalty-run-digital-tracks.xlsx
 royalty-run-physical.xlsx
+Digital_Album_Sales.xlsx
+Digital_Sales_Raw.xlsx
+Digital_Track_Sales.xlsx
+Digital_Tracks_Sales_Processed.xlsx
+Physical_Sales.xlsx
+Publishers.xlsx
+Transactions.xlsx
 __pycache__/
