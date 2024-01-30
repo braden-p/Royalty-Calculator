@@ -32,7 +32,7 @@ result = pd.concat([df_digital_albums, df_digital_tracks, df_physical])
 result['balance'] = result['balance'].round(2)
 
 # Sort the data
-result = result.sort_values(by=['agent', 'admin', 'publisher', 'track-title', 'product-type'])
+result = result.sort_values(by=['agent', 'admin', 'publisher', 'track-title', 'album-title'])
 
 # Save the merged DataFrame to a new Excel file
 result.to_excel('royalty-run.xlsx', index=False)
