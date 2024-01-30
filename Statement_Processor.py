@@ -17,8 +17,12 @@ for filename in os.listdir(processed_folder):
     file_path = os.path.join(processed_folder, filename)
     df = pd.read_excel(file_path)
 
-    # Process each unique track-title grouping
-    for track_title, group in df.groupby('track-title'):
+    # Fill NaN values in 'admin' and 'agent' with a placeholder
+    df['admin'].fillna('NO_ADMIN', inplace=True)
+    df['agent'].fillna('NO_AGENT', inplace=True)
+
+    # Process each unique track grouping
+    for _, group in df.groupby(['publisher', 'admin', 'agent', 'album-title', 'catalog-no', 'upc', 'track-number', 'track-title', 'isrc']):
         # Create a new row for the 'total' balance
         total_row = pd.Series({
             'product-type': 'total',
@@ -31,7 +35,7 @@ for filename in os.listdir(processed_folder):
             'catalog-no': group['catalog-no'].iloc[0],
             'upc': group['upc'].iloc[0],
             'track-number': group['track-number'].iloc[0],
-            'track-title': track_title,
+            'track-title': group['track-title'].iloc[0],
             'isrc': group['isrc'].iloc[0],
         })
 
