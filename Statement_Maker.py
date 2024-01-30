@@ -18,7 +18,7 @@ unique_admins = admin_data['admin'].unique()
 
 for admin in unique_admins:
     admin_df = admin_data[admin_data['admin'] == admin]
-    admin_df.to_excel(os.path.join(output_folder, f'ADMIN-{admin.replace("/", "_")}.xlsx'), index=False)
+    admin_df.to_excel(os.path.join(output_folder, f'ADMIN_{admin.replace("/", "_")}.xlsx'), index=False)
 
 # Filter rows without admin or agent and save individual publisher spreadsheets
 remaining_publishers_df = royalty_run_df[royalty_run_df['admin'].isnull() & royalty_run_df['agent'].isnull()]
