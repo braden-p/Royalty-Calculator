@@ -12,4 +12,5 @@ Physical_Sales.xlsx
 Publishers.xlsx
 Transactions.xlsx
 Publisher_Statements_XLSX/
+Publisher_Statements_XLSX_Processed/
 __pycache__/
