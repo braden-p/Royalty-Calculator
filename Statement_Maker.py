@@ -13,7 +13,7 @@ harry_fox_agency_df = royalty_run_df[royalty_run_df['agent'].notnull()]
 harry_fox_agency_df.to_excel(os.path.join(output_folder, 'AGENT-Harry Fox Agency.xlsx'), index=False)
 
 # Filter rows with admin information and save individual spreadsheets
-admin_data = royalty_run_df[royalty_run_df['admin'].notnull()]
+admin_data = royalty_run_df[(royalty_run_df['admin'].notnull()) & (royalty_run_df['agent'].isnull())]
 unique_admins = admin_data['admin'].unique()
 
 for admin in unique_admins:
