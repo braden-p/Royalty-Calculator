@@ -11,7 +11,10 @@ sales_df = pd.read_excel('Digital_Tracks_Sales_Processed.xlsx')
 sales_filtered = sales_df[['upc', 'isrc', 'net-units']]
 
 # Filter Rows in Licenses Data where product-type is "All Digital"
-licenses_filtered = licenses_df[licenses_df['product-type'] == 'All Digital'][['upc', 'product-type', 'publisher', 'admin', 'agent', 'album-title', 'catalog-no', 'track-number', 'track-title', 'isrc', 'share', 'rate-type', 'rate-percent', 'track-minutes', 'track-seconds', 'lock-date', 'penny-rate']]
+licenses_filtered = licenses_df[licenses_df['product-type'] == 'All Digital'][['upc', 'product-type', 'publisher', 'admin', 'agent', 'mechanical-exempt', 'album-title', 'catalog-no', 'track-number', 'track-title', 'isrc', 'share', 'rate-type', 'rate-percent', 'track-minutes', 'track-seconds', 'lock-date', 'penny-rate']]
+
+# Filter rows where mechanical-exempt is not 'Y'
+licenses_filtered = licenses_filtered[licenses_filtered['mechanical-exempt'] != 'Y']
 
 # Merge Data and Perform Calculations
 merged_df = pd.merge(sales_filtered, licenses_filtered, how='inner', on=['upc', 'isrc'])
