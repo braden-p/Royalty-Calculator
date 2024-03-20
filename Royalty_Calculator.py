@@ -36,3 +36,19 @@ result = result.sort_values(by=['agent', 'admin', 'publisher', 'track-title', 'a
 
 # Save the merged DataFrame to a new Excel file
 result.to_excel('royalty-run.xlsx', index=False)
+
+# Create Publisher Statements
+with open("Statement_Maker.py") as make_statements:
+    exec(make_statements.read())
+
+# Process Publisher Statements
+with open("Statement_Processor.py") as process_statements:
+    exec(process_statements.read())
+
+# Create Publisher Statement Summaries
+with open("Statement_Summarizer.py") as summarize_statements:
+    exec(summarize_statements.read())
+
+# Create Publisher Statement Cover Sheets
+with open("Cover_Sheet_Maker.py") as make_cover_sheets:
+    exec(make_cover_sheets.read())
